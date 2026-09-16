@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f5653a">
+  <title>Nilda Sunset — Compartilhar convites</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="container">
+    <header class="header">
+      <p class="eyebrow">Nilda Sunset</p>
+      <h1>Lista de compartilhamento</h1>
+      <div class="stats" aria-label="Resumo dos convites">
+        <p><strong id="totalCount">0</strong><span>Total</span></p>
+        <p><strong id="sentCount">0</strong><span>Enviados</span></p>
+        <p><strong id="pendingCount">0</strong><span>Pendentes</span></p>
+      </div>
+    </header>
+
+    <p id="status" class="status" role="status">Carregando convites...</p>
+
+    <section class="controls" aria-label="Pesquisa e filtros">
+      <label class="search-label">Pesquisar convidados<input id="search" type="search" autocomplete="off" placeholder="Digite um nome"></label>
+      <div class="filters" role="group" aria-label="Filtrar por envio">
+        <button class="filter active" type="button" data-filter="all">Todos</button>
+        <button class="filter" type="button" data-filter="pending">Pendentes</button>
+        <button class="filter" type="button" data-filter="sent">Enviados</button>
+      </div>
+    </section>
+
+    <section id="inviteList" class="invite-list" aria-live="polite"></section>
+    <p id="emptyState" class="empty" hidden>Nenhum convite encontrado.</p>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
