@@ -96,17 +96,13 @@ function createButton(label, className, handler) {
 }
 
 async function shareInvite(invite) {
-  const info = [
-    `navigator.share: ${typeof navigator.share}`,
-    `navigator.canShare: ${typeof navigator.canShare}`,
-    `isSecureContext: ${window.isSecureContext}`,
-    `protocol: ${location.protocol}`,
-    `userAgent: ${navigator.userAgent}`
-  ].join("\n");
-
-  alert(info);
+  const link = inviteLink(invite);
 
   if (typeof navigator.share !== "function") {
+    setStatus(
+      "O compartilhamento nativo não está disponível. Abra o site pelo endereço HTTPS.",
+      "error"
+    );
     return;
   }
 
@@ -114,7 +110,7 @@ async function shareInvite(invite) {
     await navigator.share({
       title: SHARE_TITLE,
       text: invite.message,
-      url: inviteLink(invite)
+      url: link
     });
 
     updateSent(invite, true);
@@ -124,7 +120,8 @@ async function shareInvite(invite) {
       return;
     }
 
-    alert(`Erro: ${error.name}\n${error.message}`);
+    console.error("Erro ao compartilhar:", error);
+    setStatus("Não foi possível abrir o compartilhamento.", "error");
   }
 }
 
